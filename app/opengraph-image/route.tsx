@@ -20,7 +20,13 @@ const robotoMono400 = readFileSync(
 );
 
 export async function GET() {
-  const posts = await getPosts();
+  // Import posts data directly without Redis for build-time generation
+  const postsData = (await import("../posts.json")).default;
+  const posts = postsData.posts.map((post) => ({
+    ...post,
+    views: 0,
+    viewsFormatted: "0",
+  }));
 
   return new ImageResponse(
     (

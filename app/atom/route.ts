@@ -1,7 +1,11 @@
-import { getPosts } from "@/app/get-posts";
-
 export async function GET() {
-  const posts = await getPosts();
+  // Import posts data directly without Redis for build-time generation
+  const postsData = (await import("../posts.json")).default;
+  const posts = postsData.posts.map((post) => ({
+    ...post,
+    views: 0,
+    viewsFormatted: "0",
+  }));
   const max = 100; // max returned posts
   return new Response(
     `<?xml version="1.0" encoding="utf-8"?>
@@ -23,7 +27,7 @@ export async function GET() {
         <entry>
           <id>${post.id}</id>
           <title>${post.title}</title>
-          <link href="https://rauchg.com/${dateMatch[0]}/${post.id}"/>
+          <link href="https://hazlijohar.com/${dateMatch[0]}/${post.id}"/>
           <updated>${post.date}</updated>
         </entry>`;
     }, "")}

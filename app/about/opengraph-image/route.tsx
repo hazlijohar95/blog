@@ -27,8 +27,10 @@ const robotoMono400 = readFileSync(
 );
 
 export async function GET() {
-  const posts = await getPosts();
-  const viewsSum = posts.reduce((sum, post) => sum + post.views, 0);
+  // Import posts data directly without Redis for build-time generation
+  const postsData = (await import("../../posts.json")).default;
+  const posts = postsData.posts;
+  const viewsSum = posts.length; // Use post count instead of view sum for build-time
 
   return new ImageResponse(
     (

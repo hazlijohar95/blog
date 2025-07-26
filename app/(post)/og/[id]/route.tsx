@@ -6,7 +6,9 @@ import { readFileSync } from "fs";
 import { join } from "path";
 
 export async function generateStaticParams() {
-  return (await getPosts()).map(post => ({ id: post.id }));
+  // Import posts data directly without Redis for build-time generation
+  const postsData = (await import("../../../posts.json")).default;
+  return postsData.posts.map(post => ({ id: post.id }));
 }
 
 // fonts
@@ -33,8 +35,9 @@ export async function GET(_req: Request, props) {
 
   const { id } = params;
 
-  const posts = await getPosts();
-  const post = posts.find(p => p.id === id);
+  // Import posts data directly without Redis for build-time generation
+  const postsData = (await import("../../../posts.json")).default;
+  const post = postsData.posts.find(p => p.id === id);
   if (!post) {
     return new Response("Not found", { status: 404 });
   }
@@ -67,7 +70,7 @@ export async function GET(_req: Request, props) {
             tw="mt-5 flex text-3xl text-gray-500"
             style={font("Roboto Mono 400")}
           >
-            {post.date} – {post.viewsFormatted} views
+            {post.date} – 0 views
           </div>
         </main>
       </div>
