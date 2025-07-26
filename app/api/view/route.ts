@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  // Handle Redis availability
+  // Try to use Redis for view tracking, fallback if not available
   try {
     if (url.searchParams.get("incr") != null) {
       const views = await redis.hincrby("views", id, 1);
@@ -53,6 +53,7 @@ export async function GET(req: NextRequest) {
     }
   } catch (error) {
     // Fallback when Redis is not available
+    console.warn("Redis not available for view tracking");
     return NextResponse.json({
       ...post,
       views: 0,

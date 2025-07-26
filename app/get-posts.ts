@@ -16,14 +16,27 @@ type Views = {
 };
 
 export const getPosts = async () => {
-  const allViews: null | Views = await redis.hgetall("views");
-  const posts = postsData.posts.map((post): Post => {
-    const views = Number(allViews?.[post.id] ?? 0);
-    return {
-      ...post,
-      views,
-      viewsFormatted: commaNumber(views),
-    };
-  });
-  return posts;
+  try {
+    const allViews: null | Views = await redis.hgetall("views");
+    const posts = postsData.posts.map((post): Post => {
+      const views = Number(allViews?.[post.id] ?? 0);
+      return {
+        ...post,
+        views,
+        viewsFormatted: commaNumber(views),
+      };
+    });
+    return posts;
+  } catch (error) {
+    // Fallback to static data if Redis is not available
+    console.warn("Redis not available, using static data");
+    const posts = postsData.posts.map((post): Post => {
+      return {
+        ...post,
+        views: 0,
+        viewsFormatted: "0",
+      };
+    });
+    return posts;
+  }
 };
