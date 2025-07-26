@@ -74,43 +74,25 @@ export function ThemeToggle() {
       */}
       <button
         aria-label="Toggle theme"
-        className={`inline-flex ${
-          isHovering && !isHoveringOverride
-            ? "bg-gray-200 dark:bg-[#313131]"
-            : ""
-        } active:bg-gray-300 transition-[background-color] dark:active:bg-[#242424] rounded-sm p-2 
-          bg-gray-200
-          dark:bg-[#313131]
-          theme-system:!bg-inherit
-          [&_.sun-icon]:hidden
-          dark:[&_.moon-icon]:hidden
-          dark:[&_.sun-icon]:inline
-        }`}
+        className="inline-flex items-center font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer p-2 rounded-sm"
         onClick={ev => {
           ev.preventDefault();
-          // prevent the hover state from rendering
           setIsHoveringOverride(true);
-
           let newPreference: string | null =
             currentTheme === "dark" ? "light" : "dark";
           const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
             .matches
             ? "dark"
             : "light";
-
-          // if the user has their current OS theme as a preference (instead of auto)
-          // and they click the toggle, we want to switch to reset the preference
           if (preference !== null && systemTheme === currentTheme) {
             newPreference = null;
             localStorage.removeItem("theme");
           } else {
             localStorage.setItem("theme", newPreference);
           }
-
           va.track("Theme toggle", {
             Theme: newPreference === null ? "system" : newPreference,
           });
-
           setPreference(newPreference);
         }}
         onMouseEnter={() => setIsHovering(true)}
@@ -119,12 +101,13 @@ export function ThemeToggle() {
           setIsHoveringOverride(false);
         }}
       >
-        <span className="sun-icon">
-          <SunIcon />
-        </span>
-        <span className="moon-icon">
+        {preference === null ? (
+          <SystemIcon />
+        ) : currentTheme === "dark" ? (
           <MoonIcon />
-        </span>
+        ) : (
+          <SunIcon />
+        )}
       </button>
     </>
   );
@@ -164,6 +147,27 @@ function SunIcon(props: any) {
         stroke="none"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function SystemIcon(props: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={16}
+      height={16}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" />
     </svg>
   );
 }

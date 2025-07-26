@@ -6,15 +6,15 @@ export async function GET() {
   return new Response(
     `<?xml version="1.0" encoding="utf-8"?>
   <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>Guillermo Rauch</title>
+    <title>Hazli Johar</title>
     <subtitle>Essays</subtitle>
-    <link href="https://rauchg.com/atom" rel="self"/>
-    <link href="https://rauchg.com/"/>
+    <link href="https://hazlijohar.com/atom" rel="self"/>
+    <link href="https://hazlijohar.com/"/>
     <updated>${posts[0].date}</updated>
-    <id>https://rauchg.com/</id>
+    <id>https://hazlijohar.com/</id>
     <author>
-      <name>Guillermo Rauch</name>
-      <email>rauchg@gmail.com</email>
+      <name>Hazli Johar</name>
+      <email>hazlijohar95@gmail.com</email>
     </author>
     ${posts.slice(0, max).reduce((acc, post) => {
       const dateMatch = post.date.match(/\d{4}/);

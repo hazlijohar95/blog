@@ -1,29 +1,38 @@
-import { ThemeToggle } from "./theme-toggle";
-import { Logo } from "./logo";
 import Link from "next/link";
+import { Logo } from "./logo";
+import { ThemeToggle } from "./theme-toggle";
 
+// Main header component - contains logo, navigation, and theme toggle
 export function Header() {
   return (
-    <header className="flex mb-5 md:mb-10 items-center">
-      <Logo />
+    <header className="flex items-center justify-between mb-8 md:mb-16">
+      {/* Logo/brand name with link to homepage */}
+      <Link href="/" className="font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer">
+        <Logo />
+      </Link>
 
-      <nav className="font-mono text-xs grow justify-end items-center flex gap-1 md:gap-3">
-        <ThemeToggle />
-
+      {/* Navigation and theme controls */}
+      <nav className="flex items-center gap-6">
+        {/* About page link */}
         <Link
           href="/about"
-          className="inline-flex hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
+          className="font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
         >
           About
         </Link>
+
+        {/* Social media link (X/Twitter) */}
         <a
-          href="https://twitter.com/rauchg"
+          href="https://x.com/hazlijohar"
           target="_blank"
-          className="inline-flex hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] items-center p-2 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
+          rel="noopener noreferrer"
+          className="font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
         >
-          <TweetIcon style={{ marginRight: 4 }} /> Follow{" "}
-          <span className="hidden md:inline">&nbsp;me</span>
+          Follow me
         </a>
+
+        {/* Theme toggle button (light/dark/system) */}
+        <ThemeToggle />
       </nav>
     </header>
   );
@@ -40,10 +49,7 @@ function TweetIcon(props: any) {
     >
       <path
         fill="currentColor"
-        fillRule="nonzero"
-        stroke="none"
-        strokeWidth={1}
-        d="M8.28 20.26c7.55 0 11.68-6.26 11.68-11.67v-.53c.8-.58 1.49-1.3 2.04-2.13-.74.33-1.53.54-2.36.65.85-.5 1.5-1.32 1.8-2.28-.78.48-1.66.81-2.6 1a4.1 4.1 0 0 0-7 3.74c-3.4-.17-6.43-1.8-8.46-4.29a4.1 4.1 0 0 0 1.28 5.48c-.68-.02-1.3-.2-1.86-.5v.05a4.11 4.11 0 0 0 3.29 4.02 4 4 0 0 1-1.85.08 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 2 18.43a11.67 11.67 0 0 0 6.28 1.83"
+        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
       />
     </svg>
   );

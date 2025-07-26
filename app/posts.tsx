@@ -84,28 +84,28 @@ function List({ posts, sort }) {
     });
   }, [posts, sort]);
 
+  // Only show posts from 2021 and newer
+  const filteredPosts = sortedPosts.filter(post => new Date(post.date).getFullYear() >= 2021);
+
   return (
     <ul>
-      {sortedPosts.map((post, i: number) => {
+      {filteredPosts.map((post, i: number) => {
         const year = getYear(post.date);
         const firstOfYear =
-          !sortedPosts[i - 1] || getYear(sortedPosts[i - 1].date) !== year;
+          !filteredPosts[i - 1] || getYear(filteredPosts[i - 1].date) !== year;
         const lastOfYear =
-          !sortedPosts[i + 1] || getYear(sortedPosts[i + 1].date) !== year;
+          !filteredPosts[i + 1] || getYear(filteredPosts[i + 1].date) !== year;
 
         return (
           <li key={post.id}>
             <Link href={`/${new Date(post.date).getFullYear()}/${post.id}`}>
               <span
-                className={`flex transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-200 dark:border-[#313131]
-                ${!firstOfYear ? "border-t-0" : ""}
-                ${lastOfYear ? "border-b-0" : ""}
-              `}
+                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-[#1a1a1a] active:bg-gray-100 dark:active:bg-[#222] py-3 relative
+                ${!lastOfYear ? "after:content-[''] after:absolute after:bottom-0 after:left-14 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 dark:after:via-gray-600 after:to-transparent" : ""}
+                `}
               >
                 <span
-                  className={`py-3 flex grow items-center ${
-                    !firstOfYear ? "ml-14" : ""
-                  }`}
+                  className={`py-3 flex grow items-center ${!firstOfYear ? "ml-14" : ""}`}
                 >
                   {firstOfYear && (
                     <span className="w-14 inline-block self-start shrink-0 text-gray-500 dark:text-gray-500">

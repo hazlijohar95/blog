@@ -1,7 +1,7 @@
 {
-  "name": "rauchg-blog",
+  "name": "hazlijohar-blog",
   "license": "MIT",
-  "description": "rauchg.com (blog)",
+  "description": "hazlijohar.com (blog)",
   "dependencies": {
     "@fontsource/inter": "^4.5.15",
     "@fontsource/roboto-mono": "^4.5.10",
