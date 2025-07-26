@@ -1,4 +1,4 @@
-import redis from "@/app/redis";
+import getRedis from "@/app/redis";
 import postsData from "@/app/posts.json";
 import commaNumber from "comma-number";
 import { NextResponse } from "next/server";
@@ -36,6 +36,7 @@ export async function GET(req: NextRequest) {
 
   // Try to use Redis for view tracking, fallback if not available
   try {
+    const redis = getRedis();
     if (url.searchParams.get("incr") != null) {
       const views = await redis.hincrby("views", id, 1);
       return NextResponse.json({
