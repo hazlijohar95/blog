@@ -7,9 +7,7 @@ export function Header() {
   return (
     <header className="flex items-center justify-between mb-8 md:mb-16">
       {/* Logo/brand name with link to homepage */}
-      <Link href="/" className="font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer">
-        <Logo />
-      </Link>
+      <Logo />
 
       {/* Navigation and theme controls */}
       <nav className="flex items-center gap-6">
