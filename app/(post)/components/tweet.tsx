@@ -1,5 +1,6 @@
 import { type ReactNode, Suspense } from "react";
-import { Tweet, getTweet } from "react-tweet/api";
+import { getTweet } from "react-tweet/api";
+import type { Tweet } from "react-tweet/api";
 import {
   EmbeddedTweet,
   TweetNotFound,
@@ -23,19 +24,31 @@ async function getAndCacheTweet(id: string): Promise<Tweet | undefined> {
     // @ts-ignore
     if (tweet && !tweet.tombstone) {
       // we populate the cache if we have a fresh tweet
-      await redis.set(`tweet:${id}`, tweet);
+      try {
+        await redis.set(`tweet:${id}`, tweet);
+      } catch (redisError) {
+        // Ignore Redis errors, just continue without caching
+        console.warn("Redis not available for tweet caching");
+      }
       return tweet;
     }
   } catch (error) {
     console.error("tweet fetch error", error);
   }
 
-  const cachedTweet: Tweet | null = await redis.get(`tweet:${id}`);
+  // Try to get cached tweet, but handle Redis unavailability
+  try {
+    const cachedTweet: Tweet | null = await redis.get(`tweet:${id}`);
 
-  // @ts-ignore
-  if (!cachedTweet || cachedTweet.tombstone) return undefined;
+    // @ts-ignore
+    if (!cachedTweet || cachedTweet.tombstone) return undefined;
 
-  return cachedTweet;
+    return cachedTweet;
+  } catch (redisError) {
+    // If Redis is not available, just return undefined
+    console.warn("Redis not available for tweet caching");
+    return undefined;
+  }
 }
 
 const TweetContent = async ({ id, components }: TweetProps) => {

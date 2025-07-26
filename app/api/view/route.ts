@@ -34,19 +34,29 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  if (url.searchParams.get("incr") != null) {
-    const views = await redis.hincrby("views", id, 1);
+  // Handle Redis availability
+  try {
+    if (url.searchParams.get("incr") != null) {
+      const views = await redis.hincrby("views", id, 1);
+      return NextResponse.json({
+        ...post,
+        views,
+        viewsFormatted: commaNumber(views),
+      });
+    } else {
+      const views = (await redis.hget("views", id)) ?? 0;
+      return NextResponse.json({
+        ...post,
+        views,
+        viewsFormatted: commaNumber(Number(views)),
+      });
+    }
+  } catch (error) {
+    // Fallback when Redis is not available
     return NextResponse.json({
       ...post,
-      views,
-      viewsFormatted: commaNumber(views),
-    });
-  } else {
-    const views = (await redis.hget("views", id)) ?? 0;
-    return NextResponse.json({
-      ...post,
-      views,
-      viewsFormatted: commaNumber(Number(views)),
+      views: 0,
+      viewsFormatted: "0",
     });
   }
 }
