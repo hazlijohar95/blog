@@ -27,4 +27,49 @@
       font-family: "Inter var", sans-serif;
     }
   }
+
+  /* Mobile-native enhancements */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+  }
+
+  /* Touch-friendly button and link styles */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Mobile-optimized typography */
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px; /* Prevents zoom on iOS */
+      line-height: 1.6;
+    }
+  }
+
+  /* Smooth transitions for mobile interactions */
+  * {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Mobile-safe area handling */
+  @supports (padding: max(0px)) {
+    .safe-area-top {
+      padding-top: max(env(safe-area-inset-top), 1rem);
+    }
+    
+    .safe-area-bottom {
+      padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+    }
+  }
 }

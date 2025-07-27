@@ -33,9 +33,14 @@ export const metadata = {
   metadataBase: new URL("https://hazlijohar.com"),
 };
 
-// Viewport configuration for mobile responsiveness
+// Enhanced viewport configuration for mobile-native experience
 export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
   themeColor: "transparent",
+  viewportFit: 'cover',
 };
 
 // Root layout component - wraps all pages and provides the main structure
@@ -57,11 +62,17 @@ export default function RootLayout({
             __html: `(${themeEffect.toString()})();(${doge.toString()})();`,
           }}
         />
+        {/* Mobile-native meta tags */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Hazli Johar" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
       </head>
 
-      <body className="dark:text-vercel-white dark:bg-vercel-black max-w-2xl m-auto">
-        {/* Main content container with responsive padding */}
-        <main className="p-6 pt-3 md:pt-6 min-h-screen">
+      <body className="dark:text-vercel-white dark:bg-vercel-black max-w-2xl m-auto touch-manipulation">
+        {/* Main content container with mobile-native responsive padding */}
+        <main className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-6 min-h-screen">
           {/* Site header with navigation */}
           <Header />
           {/* Page content - this is where individual pages render */}

@@ -5,16 +5,16 @@ import { ThemeToggle } from "./theme-toggle";
 // Main header component - contains logo, navigation, and theme toggle
 export function Header() {
   return (
-    <header className="flex items-center justify-between mb-8 md:mb-16">
+    <header className="flex items-center justify-between mb-6 md:mb-16 px-2">
       {/* Logo/brand name with link to homepage */}
       <Logo />
 
       {/* Navigation and theme controls */}
-      <nav className="flex items-center gap-6">
+      <nav className="flex items-center gap-3 sm:gap-6">
         {/* About page link */}
         <Link
           href="/about"
-          className="font-mono text-gray-700 dark:text-vercel-white underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
+          className="font-mono text-gray-700 dark:text-vercel-white underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer text-sm sm:text-base px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800"
         >
           About
         </Link>
@@ -24,7 +24,7 @@ export function Header() {
           href="https://x.com/hazlijohar"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-gray-700 dark:text-vercel-white underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
+          className="font-mono text-gray-700 dark:text-vercel-white underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer text-sm sm:text-base px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800"
         >
           Follow me
         </a>

@@ -32,13 +32,13 @@ export function Posts({ posts: initialPosts }) {
 
   return (
     <Suspense fallback={null}>
-      <main className="max-w-2xl font-mono m-auto mb-10 text-sm">
-        <header className="text-gray-500 dark:text-vercel-gray-400 flex items-center text-xs">
+      <main className="max-w-2xl font-mono m-auto mb-10 text-sm px-2">
+        <header className="text-gray-500 dark:text-vercel-gray-400 flex items-center text-xs mb-4">
           <button
             onClick={sortDate}
-            className={`w-12 h-9 text-left  ${
+            className={`w-12 h-10 text-left px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation ${
               sort[0] === "date" && sort[1] !== "desc"
-                ? "text-gray-700 dark:text-vercel-white"
+                ? "text-gray-700 dark:text-vercel-white bg-gray-100 dark:bg-vercel-gray-900"
                 : ""
             }`}
           >
@@ -49,11 +49,12 @@ export function Posts({ posts: initialPosts }) {
           <button
             onClick={sortViews}
             className={`
-                  h-9
+                  h-10
                   pl-4
+                  px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation
                   ${
                     sort[0] === "views"
-                      ? "text-gray-700 dark:text-vercel-white"
+                      ? "text-gray-700 dark:text-vercel-white bg-gray-100 dark:bg-vercel-gray-900"
                       : ""
                   }
                 `}
@@ -88,7 +89,7 @@ function List({ posts, sort }) {
   const filteredPosts = sortedPosts.filter(post => new Date(post.date).getFullYear() >= 2021);
 
   return (
-    <ul>
+    <ul className="space-y-1">
       {filteredPosts.map((post, i: number) => {
         const year = getYear(post.date);
         const firstOfYear =
@@ -97,25 +98,25 @@ function List({ posts, sort }) {
           !filteredPosts[i + 1] || getYear(filteredPosts[i + 1].date) !== year;
 
         return (
-          <li key={post.id}>
+          <li key={post.id} className="rounded-lg overflow-hidden">
             <Link href={`/${new Date(post.date).getFullYear()}/${post.id}`}>
               <span
-                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-vercel-gray-900 active:bg-gray-100 dark:active:bg-vercel-gray-800 py-3 relative
+                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-vercel-gray-900 active:bg-gray-100 dark:active:bg-vercel-gray-800 py-4 px-3 relative touch-manipulation
                 ${!lastOfYear ? "after:content-[''] after:absolute after:bottom-0 after:left-14 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 dark:after:via-vercel-gray-700 after:to-transparent" : ""}
                 `}
               >
                 <span
-                  className={`py-3 flex grow items-center ${!firstOfYear ? "ml-14" : ""}`}
+                  className={`py-1 flex grow items-center ${!firstOfYear ? "ml-14" : ""}`}
                 >
                   {firstOfYear && (
-                    <span className="w-14 inline-block self-start shrink-0 text-gray-500 dark:text-vercel-gray-400">
+                    <span className="w-14 inline-block self-start shrink-0 text-gray-500 dark:text-vercel-gray-400 text-xs sm:text-sm">
                       {year}
                     </span>
                   )}
 
-                  <span className="grow dark:text-vercel-white">{post.title}</span>
+                  <span className="grow dark:text-vercel-white text-sm sm:text-base leading-relaxed">{post.title}</span>
 
-                  <span className="text-gray-500 dark:text-vercel-gray-400 text-xs">
+                  <span className="text-gray-500 dark:text-vercel-gray-400 text-xs ml-2">
                     {post.viewsFormatted}
                   </span>
                 </span>

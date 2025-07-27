@@ -74,7 +74,7 @@ export function ThemeToggle() {
       */}
       <button
         aria-label="Toggle theme"
-        className="inline-flex items-center font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer p-2 rounded-sm"
+        className="inline-flex items-center font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer p-2 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation"
         onClick={ev => {
           ev.preventDefault();
           setIsHoveringOverride(true);
