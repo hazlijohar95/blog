@@ -53,3 +53,4 @@ A minimal, modern, and personal blog built with Next.js.
 ## License
 
 MIT
+# Force Vercel deployment - Sun Jul 27 12:37:04 JST 2025
