@@ -4,7 +4,10 @@ module.exports = withMDX({
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   experimental: {
     mdxRs: true,
+    optimizePackageImports: ['@vercel/analytics', '@vercel/speed-insights'],
   },
+  compress: true,
+  poweredByHeader: false,
   images: {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -42,7 +45,20 @@ module.exports = withMDX({
   headers() {
     return [
       {
-        source: "/images/rauchg-3d4cecf.jpg",
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "cache-control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
+            key: "x-content-type-options",
+            value: "nosniff",
+          },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
         headers: [
           {
             key: "cache-control",
@@ -51,11 +67,19 @@ module.exports = withMDX({
         ],
       },
       {
-        source: "/images/:path*",
+        source: "/(.*)",
         headers: [
           {
-            key: "cache-control",
-            value: "public, max-age=31536000, immutable",
+            key: "x-frame-options",
+            value: "DENY",
+          },
+          {
+            key: "x-content-type-options",
+            value: "nosniff",
+          },
+          {
+            key: "referrer-policy",
+            value: "origin-when-cross-origin",
           },
         ],
       },

@@ -1,12 +1,17 @@
 "use client";
-import { Analytics as AnalyticsComponent } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-export function Analytics() {
+export function AnalyticsWrapper() {
   return (
     <>
-      <AnalyticsComponent />
-      <SpeedInsights />
+      <Analytics 
+        mode="production"
+        debug={false}
+      />
+      <SpeedInsights 
+        sampleRate={0.1} // Sample 10% of users for performance monitoring
+      />
     </>
   );
 }

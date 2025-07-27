@@ -11,9 +11,14 @@ const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 export function Posts({ posts: initialPosts }) {
   const [sort, setSort] = useState<SortSetting>(["date", "desc"]);
-  const { data: posts } = useSWR("/api/posts", fetcher, {
+  const { data: posts, error } = useSWR("/api/posts", fetcher, {
     fallbackData: initialPosts,
     refreshInterval: 0, // Disable auto-refresh for better development experience
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    dedupingInterval: 60000, // Dedupe requests within 1 minute
+    errorRetryCount: 2,
+    errorRetryInterval: 5000,
   });
 
   function sortDate() {

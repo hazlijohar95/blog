@@ -4,7 +4,7 @@ import "./globals.css";
 // Next.js and React imports
 import { Inter } from "next/font/google";
 import { themeEffect } from "./theme-effect";
-import { Analytics } from "./analytics";
+import { AnalyticsWrapper } from "./analytics";
 import { Header } from "./header";
 import { Footer } from "./footer";
 import { doge } from "./doge";
@@ -100,7 +100,7 @@ export default function RootLayout({
         {/* Site footer */}
         <Footer />
         {/* Analytics tracking */}
-        <Analytics />
+        <AnalyticsWrapper />
       </body>
     </html>
   );
