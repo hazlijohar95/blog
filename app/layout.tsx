@@ -9,8 +9,12 @@ import { Header } from "./header";
 import { Footer } from "./footer";
 import { doge } from "./doge";
 
-// Font configuration - Inter font for the entire application
-const inter = Inter({ subsets: ["latin"] });
+// Font configuration - Inter font for the entire application with better desktop optimization
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 // Main layout metadata - controls SEO, social media cards, and browser behavior
 export const metadata = {
@@ -84,9 +88,9 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="dark:text-vercel-white dark:bg-vercel-black max-w-2xl m-auto touch-manipulation">
-        {/* Main content container with mobile-native responsive padding */}
-        <main className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-6 min-h-screen">
+      <body className="dark:text-vercel-white dark:bg-vercel-black max-w-4xl m-auto touch-manipulation">
+        {/* Main content container with enhanced desktop spacing */}
+        <main className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-6 lg:px-12 lg:py-8 xl:px-16 xl:py-10 min-h-screen">
           {/* Site header with navigation */}
           <Header />
           {/* Page content - this is where individual pages render */}

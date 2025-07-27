@@ -32,11 +32,11 @@ export function Posts({ posts: initialPosts }) {
 
   return (
     <Suspense fallback={null}>
-      <main className="max-w-2xl font-mono m-auto mb-10 text-sm px-2">
-        <header className="text-gray-500 dark:text-vercel-gray-400 flex items-center text-xs mb-4">
+      <main className="max-w-4xl font-mono m-auto mb-10 text-sm px-2 lg:text-base">
+        <header className="text-gray-500 dark:text-vercel-gray-400 flex items-center text-xs lg:text-sm mb-4 lg:mb-6">
           <button
             onClick={sortDate}
-            className={`w-12 h-10 text-left px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation ${
+            className={`w-12 h-10 lg:w-16 lg:h-12 text-left px-2 py-1 lg:px-3 lg:py-2 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation hover-lift ${
               sort[0] === "date" && sort[1] !== "desc"
                 ? "text-gray-700 dark:text-vercel-white bg-gray-100 dark:bg-vercel-gray-900"
                 : ""
@@ -45,13 +45,13 @@ export function Posts({ posts: initialPosts }) {
             date
             {sort[0] === "date" && sort[1] === "asc" && "↑"}
           </button>
-          <span className="grow pl-2">title</span>
+          <span className="grow pl-2 lg:pl-4">title</span>
           <button
             onClick={sortViews}
             className={`
-                  h-10
-                  pl-4
-                  px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation
+                  h-10 lg:h-12
+                  pl-4 lg:pl-6
+                  px-2 py-1 lg:px-3 lg:py-2 rounded-md hover:bg-gray-100 dark:hover:bg-vercel-gray-900 active:bg-gray-200 dark:active:bg-vercel-gray-800 touch-manipulation hover-lift
                   ${
                     sort[0] === "views"
                       ? "text-gray-700 dark:text-vercel-white bg-gray-100 dark:bg-vercel-gray-900"
@@ -89,7 +89,7 @@ function List({ posts, sort }) {
   const filteredPosts = sortedPosts.filter(post => new Date(post.date).getFullYear() >= 2021);
 
   return (
-    <ul className="space-y-1">
+    <ul className="space-y-1 lg:space-y-2">
       {filteredPosts.map((post, i: number) => {
         const year = getYear(post.date);
         const firstOfYear =
@@ -98,25 +98,25 @@ function List({ posts, sort }) {
           !filteredPosts[i + 1] || getYear(filteredPosts[i + 1].date) !== year;
 
         return (
-          <li key={post.id} className="rounded-lg overflow-hidden">
+          <li key={post.id} className="rounded-lg overflow-hidden hover-lift">
             <Link href={`/${new Date(post.date).getFullYear()}/${post.id}`}>
               <span
-                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-vercel-gray-900 active:bg-gray-100 dark:active:bg-vercel-gray-800 py-4 px-3 relative touch-manipulation
-                ${!lastOfYear ? "after:content-[''] after:absolute after:bottom-0 after:left-14 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 dark:after:via-vercel-gray-700 after:to-transparent" : ""}
+                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-vercel-gray-900 active:bg-gray-100 dark:active:bg-vercel-gray-800 py-4 px-3 lg:py-6 lg:px-6 relative touch-manipulation
+                ${!lastOfYear ? "after:content-[''] after:absolute after:bottom-0 after:left-14 lg:after:left-20 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 dark:after:via-vercel-gray-700 after:to-transparent" : ""}
                 `}
               >
                 <span
-                  className={`py-1 flex grow items-center ${!firstOfYear ? "ml-14" : ""}`}
+                  className={`py-1 flex grow items-center ${!firstOfYear ? "ml-14 lg:ml-20" : ""}`}
                 >
                   {firstOfYear && (
-                    <span className="w-14 inline-block self-start shrink-0 text-gray-500 dark:text-vercel-gray-400 text-xs sm:text-sm">
+                    <span className="w-14 lg:w-20 inline-block self-start shrink-0 text-gray-500 dark:text-vercel-gray-400 text-xs sm:text-sm lg:text-base font-semibold">
                       {year}
                     </span>
                   )}
 
-                  <span className="grow dark:text-vercel-white text-sm sm:text-base leading-relaxed">{post.title}</span>
+                  <span className="grow dark:text-vercel-white text-sm sm:text-base lg:text-lg leading-relaxed lg:leading-relaxed font-medium">{post.title}</span>
 
-                  <span className="text-gray-500 dark:text-vercel-gray-400 text-xs ml-2">
+                  <span className="text-gray-500 dark:text-vercel-gray-400 text-xs lg:text-sm ml-2 lg:ml-4 font-mono">
                     {post.viewsFormatted}
                   </span>
                 </span>
