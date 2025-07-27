@@ -68,6 +68,20 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Hazli Johar" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="format-detection" content="telephone=no" />
+        
+        {/* Preload critical images for better mobile performance */}
+        <link
+          rel="preload"
+          href="/images/hazli-profile.jpg"
+          as="image"
+          type="image/jpeg"
+        />
+        <link
+          rel="preload"
+          href="/images/hazli-profile-gray.jpg"
+          as="image"
+          type="image/jpeg"
+        />
       </head>
 
       <body className="dark:text-vercel-white dark:bg-vercel-black max-w-2xl m-auto touch-manipulation">

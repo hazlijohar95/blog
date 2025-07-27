@@ -72,4 +72,40 @@
       padding-bottom: max(env(safe-area-inset-bottom), 1rem);
     }
   }
+
+  /* Image loading optimizations */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Optimize image loading for mobile */
+  @media (max-width: 640px) {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  /* Loading skeleton for images */
+  .image-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  .dark .image-skeleton {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
 }
