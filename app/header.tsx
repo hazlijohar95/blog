@@ -14,7 +14,7 @@ export function Header() {
         {/* About page link */}
         <Link
           href="/about"
-          className="font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
+          className="font-mono text-gray-700 dark:text-vercel-white underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
         >
           About
         </Link>
@@ -24,7 +24,7 @@ export function Header() {
           href="https://x.com/hazlijohar"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
+          className="font-mono text-gray-700 dark:text-vercel-white underline-offset-4 hover:underline focus:underline transition-all cursor-pointer hover:cursor-pointer"
         >
           Follow me
         </a>

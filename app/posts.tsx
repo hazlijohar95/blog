@@ -33,12 +33,12 @@ export function Posts({ posts: initialPosts }) {
   return (
     <Suspense fallback={null}>
       <main className="max-w-2xl font-mono m-auto mb-10 text-sm">
-        <header className="text-gray-500 dark:text-gray-600 flex items-center text-xs">
+        <header className="text-gray-500 dark:text-vercel-gray-400 flex items-center text-xs">
           <button
             onClick={sortDate}
             className={`w-12 h-9 text-left  ${
               sort[0] === "date" && sort[1] !== "desc"
-                ? "text-gray-700 dark:text-gray-400"
+                ? "text-gray-700 dark:text-vercel-white"
                 : ""
             }`}
           >
@@ -53,7 +53,7 @@ export function Posts({ posts: initialPosts }) {
                   pl-4
                   ${
                     sort[0] === "views"
-                      ? "text-gray-700 dark:text-gray-400"
+                      ? "text-gray-700 dark:text-vercel-white"
                       : ""
                   }
                 `}
@@ -100,22 +100,22 @@ function List({ posts, sort }) {
           <li key={post.id}>
             <Link href={`/${new Date(post.date).getFullYear()}/${post.id}`}>
               <span
-                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-[#1a1a1a] active:bg-gray-100 dark:active:bg-[#222] py-3 relative
-                ${!lastOfYear ? "after:content-[''] after:absolute after:bottom-0 after:left-14 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 dark:after:via-gray-600 after:to-transparent" : ""}
+                className={`flex transition-all duration-200 hover:bg-gray-50 dark:hover:bg-vercel-gray-900 active:bg-gray-100 dark:active:bg-vercel-gray-800 py-3 relative
+                ${!lastOfYear ? "after:content-[''] after:absolute after:bottom-0 after:left-14 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-gray-300 dark:after:via-vercel-gray-700 after:to-transparent" : ""}
                 `}
               >
                 <span
                   className={`py-3 flex grow items-center ${!firstOfYear ? "ml-14" : ""}`}
                 >
                   {firstOfYear && (
-                    <span className="w-14 inline-block self-start shrink-0 text-gray-500 dark:text-gray-500">
+                    <span className="w-14 inline-block self-start shrink-0 text-gray-500 dark:text-vercel-gray-400">
                       {year}
                     </span>
                   )}
 
-                  <span className="grow dark:text-gray-100">{post.title}</span>
+                  <span className="grow dark:text-vercel-white">{post.title}</span>
 
-                  <span className="text-gray-500 dark:text-gray-500 text-xs">
+                  <span className="text-gray-500 dark:text-vercel-gray-400 text-xs">
                     {post.viewsFormatted}
                   </span>
                 </span>

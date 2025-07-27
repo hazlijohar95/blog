@@ -15,7 +15,7 @@
   :root.dark {
     color-scheme: dark;
     /* note: must keep in sync with `theme-color` in `theme-effect.ts` */
-    @apply bg-[#1C1C1C];
+    @apply bg-[#000000];
   }
 
   :root.pause-transitions * {

@@ -59,7 +59,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="dark:text-gray-100 max-w-2xl m-auto">
+      <body className="dark:text-vercel-white dark:bg-vercel-black max-w-2xl m-auto">
         {/* Main content container with responsive padding */}
         <main className="p-6 pt-3 md:pt-6 min-h-screen">
           {/* Site header with navigation */}
